@@ -16,7 +16,7 @@ jobs:
       run: docker build . --file Dockerfile --tag image
     
     - name: docker run
-      run: docker run —name container image      
+      run: docker run --name container image   
 
     - name: checkout 2
       uses: actions/checkout@v3
