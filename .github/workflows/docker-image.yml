@@ -18,7 +18,7 @@ jobs:
       run: docker build . --file Dockerfile --tag my-docker-ubuntu
       
     - name: Create the container from image
-      run: docker run -i -t my-docker-ubuntu
+      run: docker run -i my-docker-ubuntu
       
     - name: Copy pdf from container
       run: docker cp my-docker-ubuntu:main.pdf .
