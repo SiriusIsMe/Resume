@@ -20,11 +20,8 @@ jobs:
     - name: Create the container from image
       run: docker run -i my-docker-ubuntu
       
-    - name: Copy main.pdf from container
-      run: docker cp my-docker-ubuntu:main.pdf main.pdf
-      
     - name: Archive main.pdf as artifact
       uses: actions/upload-artifact@v2
       with:
-        name: resume
-        path: main.pdf
+        name: my-resume
+        path: my-docker-ubuntu:main.pdf
