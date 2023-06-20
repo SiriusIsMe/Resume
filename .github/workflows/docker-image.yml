@@ -21,9 +21,7 @@ jobs:
     - name: checkout 2
       uses: actions/checkout@v3
       
-#     - name: Copy file
-#       run: docker cp container:/main.pdf /
     - name: Copy file
-      run: docker cp container:/main.pdf ./main.pdf
+      run: sudo docker cp container:/main.pdf /
       
     - uses: stefanzweifel/git-auto-commit-action@v4
