@@ -16,5 +16,9 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      
+    - name: Create the container from image
       run: docker run -d --name my-container my-image-name
+      
+    - name: Copy pdf from container
       run: docker cp my-container:main.pdf .
