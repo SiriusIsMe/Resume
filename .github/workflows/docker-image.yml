@@ -5,23 +5,29 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
     permissions:
       contents: write
-    
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-docker-ubuntu
     
+    - name: Save Docker image as tar
+      run: docker save my-docker-ubuntu > my-docker-ubuntu.tar
+      
+    - name: Load Docker image from tar
+      run: docker load < my-docker-ubuntu.tar
+      
+    - name: Compile the Docker image
+      run: docker build . --file Dockerfile --tag my-docker-ubuntu-compiled
+      
     - name: checkout 2
       uses: actions/checkout@v3
-
+      
     - name: Copy file
-      run: docker cp my-docker-ubuntu:/main.pdf .
+      run: docker cp my-docker-ubuntu-compiled:/main.pdf .
       
     - uses: stefanzweifel/git-auto-commit-action@v4
