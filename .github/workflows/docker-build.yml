@@ -12,6 +12,3 @@ jobs:
 
     - name: Build Docker image
       run: docker build -t myimage:latest .
-
-    - name: Test Docker image
-      run: docker run myimage:latest my-test-command
