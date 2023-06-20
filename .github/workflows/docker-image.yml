@@ -3,25 +3,25 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
 
   build:
-
+    permissions:
+      contents: write
+    
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-docker-ubuntu
+      run: docker build ../.. --file Dockerfile --tag my-docker-ubuntu
+    
+    - name: checkout 2
+      uses: actions/checkout@v3
+
+    - name: Copy file
+      run: docker cp my-docker-ubuntu:/main.pdf .
       
-#     - name: Create the container from image
-#       run: docker run -i my-docker-ubuntu
-      
-    - name: Archive main.pdf as artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: my-resume
-        path: my-docker-ubuntu:main.pdf
+    - uses: stefanzweifel/git-auto-commit-action@v4
