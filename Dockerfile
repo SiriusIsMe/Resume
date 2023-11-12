@@ -8,4 +8,4 @@ RUN tlmgr update --self --all
 
 COPY . .
 
-RUN pdflatex /main.tex
+RUN pdflatex ./main.tex
